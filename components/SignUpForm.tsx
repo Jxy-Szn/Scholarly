@@ -11,7 +11,7 @@ export function SignUpForm({
   ...props
 }: React.ComponentProps<"form">) {
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form className={cn("fles flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-4 text-center">
         <div className="rounded-lg bg-primary/10 p-3">
           <GraduationCap className="h-8 w-8 text-primary" />
