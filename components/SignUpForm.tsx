@@ -23,6 +23,7 @@ import { PasswordInput } from "@/components/PasswordInput";
 
 // Define the form schema for validation
 const formSchema = z.object({
+  fullname: z.string().min(1, "Full name is required"),
   email: z.string().email("Invalid email address").min(1, "Email is required"),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 });
@@ -35,6 +36,7 @@ export function SignUpForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      fullname: "",
       email: "",
       password: "",
     },
@@ -73,6 +75,25 @@ export function SignUpForm({
           </h1>
         </div>
         <div className="grid gap-6">
+          <FormField
+            control={form.control}
+            name="fullname"
+            render={({ field }) => (
+              <FormItem className="grid gap-3">
+                <FormLabel htmlFor="fullname">Full Name</FormLabel>
+                <FormControl>
+                  <Input
+                    id="fullname"
+                    type="text"
+                    placeholder="John Doe"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="email"

@@ -1,11 +1,11 @@
-import { SignUpForm } from "@/components/SignUpForm";
+import { SignUpVerificationForm } from "@/components/SignUpVerificationForm";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export default function Page() {
+export default function LoginPage() {
   return (
     <div className="relative grid min-h-svh lg:grid-cols-2">
-      {/* Responsive Back Arrow (shows on all screen sizes) */}
+      {/* Back Arrow for all screen sizes */}
       <Link
         href="/"
         className="absolute top-6 left-6 z-10 flex items-center justify-center lg:top-8 lg:left-8"
@@ -17,15 +17,18 @@ export default function Page() {
         />
       </Link>
 
-      {/* LeftSide (still only visible on large screens) */}
+      {/* LeftSide (only visible on large screens) */}
       <div className="bg-primary hidden lg:block"></div>
 
       {/* RightSide */}
       <div className="flex flex-col gap-4 p-0 md:p-0">
-        <div className="flex justify-center gap-2 md:justify-start"></div>
+        {/* 
+          For small screens: align to top with pt-10 
+          For md and up: center vertically (items-center) and remove extra top padding
+        */}
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <SignUpForm />
+            <SignUpVerificationForm />
           </div>
         </div>
       </div>
