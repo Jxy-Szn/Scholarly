@@ -105,9 +105,6 @@ export function SignUpForm({
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
-                  Your password must be at least 8 characters long.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
