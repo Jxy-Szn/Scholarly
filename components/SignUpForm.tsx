@@ -42,18 +42,22 @@ export function SignUpForm({
   });
 
   // Handle form submission
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      // Display form values in a toast notification
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
-      // You would typically send these values to your backend for user registration
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error || "Registration failed");
+        return;
+      }
+      toast.success("Registration successful! Check your email for the OTP.");
+      // Optionally redirect to OTP verification page
+      // router.push("/sign_up_verify?email=" + encodeURIComponent(values.email));
     } catch (error) {
-      console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
     }
   }
@@ -131,7 +135,7 @@ export function SignUpForm({
           />
 
           <Button type="submit" className="w-full">
-            Continue
+            SignUp
           </Button>
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
             <span className="bg-background text-muted-foreground relative z-10 px-2">
